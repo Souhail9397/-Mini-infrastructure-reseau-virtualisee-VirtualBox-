@@ -71,8 +71,72 @@ Donc bien décocher ces deux cases, puis `Continuer`.
 L'installation est désormais terminée, redémarrer la machine pour pouvoir accéder au serveur.  
 </details> 
 
-  
 
+<details><summary><h1>🖥️ Création des machines client Windows10<h1></summary> 
+
+# :one: Téléchargement de l'ISO  
+
+Se rendre sur le site officiel de Windows pour télécharger l'image ISO : https://www.microsoft.com/fr-fr/software-download/windows10   
+
+Suivre les étapes suivantes :  
+  
+![isowin10](https://github.com/user-attachments/assets/2cdc9d33-5046-4af0-b05e-47a1f9472187)  
+  
+![mediacreationtoolwin10](https://github.com/user-attachments/assets/369d3c1e-5ac6-4fe2-a737-6c691bcc330e)  
+
+Lancer l'outil d'installation lorsque le téléchargement est terminé.  
+
+➡️ Accepter les conditions du contrat de licence.  
+
+➡️ **Que voulez vous faire?** : `Crée un support d'installation (Clé USB, DVD ou fichier ISO) pour un autre PC`  
+
+➡️ **Sélectionner la langue, l'architecture et l'édition** : laisser par défaut, puis `suivant`  
+
+➡️ **Choisir le média à utiliser** : `Fichier ISO`  
+  
+Attendre que le téléchargement de l'ISO soit complété.  
+  
+![telechargementisowin](https://github.com/user-attachments/assets/7a395748-31bd-4ea9-9bfd-114b13caaa18)  
+
+# :two: Sur VirtualBox  
+
+## ⚙️ Création de la machine  
+
+Nous allons créer une machine client légère. 
+
+Créer une nouvelle VM, configurer 2Go de RAM et 20Go d'espace de stockage. Dans l'ordre d'amorçage, choisir **Optique** en 1ère position, suivi de **Disque dur** et décocher **Disquette**. Insérer ensuite l'image ISO dans le contrôleur SATA :  
+![isowinsata](https://github.com/user-attachments/assets/52cb4886-bbf4-4d08-8842-d84f7b43d63c)  
+
+## 📦 Installation de Windows10
+
+➡️ **Langue à installer** : `Français`  
+  
+➡️ **Format horaire et monétaire** : `Français (France)`  
+  
+➡️ **Clavier ou méthode d'entrée** : `Français`  
+
+➡️ Ensuite, cliquer sur `Ìnstaller maintenant`  
+
+➡️ **Activer Windows** : Cliquer sur `Je n'ai pas de clé de produit (Product Key)`  
+
+➡️ **Sélectionner le système d'exploitation à installer** : Choisir `Windows10 Professionnel`  
+
+➡️ **Quel type d'installation voulez-vous effectuer?** : `Personnalisé : installer uniquement windows (avancé)`  
+
+➡️ Choisir le disque dur sur lequel installer Windows. Un seul disque dur devrait être proposé (le disque dur de 20Go configuré lors de la création de la VM).  
+
+Maintenant, les configurations finales vont avoir lieu.  
+
+💡 **Conseil** : une série de propositions sera proposée par Windows. Choisir l'option `Ignorer`, `Passer` ou `Pas maintenant` au maximum afin de vite terminer la configuration de base.  
+  
+Après avoir terminé ces configurations, la VM sera prête à l'utilisation ✅  
+
+➡️ **Nous serons amenés à répéter cette création de VM Windows10 deux fois afin de simuler les trois VLANs de cette mini-infra réseau**  
+
+
+
+
+  
 
 
 
