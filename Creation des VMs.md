@@ -1,5 +1,5 @@
 <details>
-<summary><strong>## 🧭 Création du routeur Linux  
+<summary>## 🧭 Création du routeur Linux  
 
 # :one: Téléchargement de l'ISO  
   
