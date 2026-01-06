@@ -1,5 +1,4 @@
-<details>
-<summary>## 🧭 Création du routeur Linux  
+## 🧭 Création du routeur Linux  
 
 # :one: Téléchargement de l'ISO  
   
@@ -70,7 +69,6 @@ Donc bien décocher ces deux cases, puis `Continuer`.
 ➡️ **Périphérique où sera installé le programme de démarrage** : `/deb/sda (ata-VBOX_HARDDISK_VBe4a7f8c9-2ac879e2)`  
   
 L'installation est désormais terminée, redémarrer la machine pour pouvoir accéder au serveur.  
-</details>
 
   
 
