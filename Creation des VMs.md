@@ -133,7 +133,43 @@ Maintenant, les configurations finales vont avoir lieu.
   
 Après avoir terminé ces configurations, la VM sera prête à l'utilisation ✅  
 
-➡️ **Nous serons amenés à répéter cette création de VM Windows10 deux fois afin de simuler les trois VLANs de cette mini-infra réseau**  
+➡️ **Nous serons amenés à répéter cette création de VM Windows10 une fois de plus afin de simuler les deux VLANs Utilisateurs de cette mini-infra réseau**  
+
+</details>     
+
+<details><summary><h1>🌐 Création du serveur Windows DHCP et DNS<h1></summary>  
+
+ # :one: Téléchargement de l'ISO  
+   
+➡️ Aller sur le site officiel de Windows pour se procurer l'image ISO de Windows Server https://www.microsoft.com/fr-fr/evalcenter/evaluate-windows-server-2022  
+
+➡️ Cliquer sur `Télécharger ce fichier ISO` et attendre que le téléchargement de l'ISO se termine.  
+
+# :two: Sur VirtualBox  
+
+➡️ Créer une nouvelle VM : 25Go d'espace de stockage et 2Go de RAM. Dans l'ordre d'amorçage, choisir **Optique** en 1ère position, suivi de **Disque dur** et décocher **Disquette**. Insérer ensuite l'image ISO dans le contrôleur SATA.    
+
+**Démarrer la VM et suivre les étapes** :  
+
+➡️ **Langue à installer** : `Français`  
+
+➡️ **Fromat horaire et monétaire** : `Français (France)`  
+
+➡️ **Clavier ou méthode d'entrée** : `Français`  
+
+➡️ Cliquer sur `Installer maintenant`  
+
+➡️ **Sélectionner le système d'exploitation à installer** : `Windows Server 2022 Standard Evaluation (expérience de bureau)`  
+
+➡️ **Quel type d'installation voulez-vous effectuer ?** : `Personnalisé : installer uniquement le système d'exploitation Microsoft Server (avancé)`  
+
+➡️ Attendre que l'installation se termine. Le serveur va ensuite redémarrer  
+
+➡️ Choisir un mot de passe pour la session **Administrateur**  
+
+## ✅ Installation complétée ✅
+
+</details>   
 
 
 
