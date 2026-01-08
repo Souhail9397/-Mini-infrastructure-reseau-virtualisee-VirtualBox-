@@ -77,8 +77,16 @@ En face de `Adresse IP de début`, on rentre l'IP **192.168.10.1** et en face de
 
 ![dhcprouteurpasserellevlan30](https://github.com/user-attachments/assets/a036b463-b778-42f4-926f-e970884ab4cf)
 
+</details>  
 
+<details><summary><h1>Configuration d'un relais DHCP sur le routeur interne<h1></summary>    
+
+### Comme nos postes utilisateurs sont sur des VLAN différents du VLAN où se trouve notre serveur DHCP, on doit configurer un relais DHCP sur le routeur interne pour que les postes utilisateurs puissent reçevoir leurs adresses IP.  
 
   
+➡️
+  
 
-</details> 
+  
+  
+</details>    
