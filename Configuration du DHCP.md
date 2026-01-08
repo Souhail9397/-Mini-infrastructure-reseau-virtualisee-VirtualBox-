@@ -38,21 +38,21 @@ Aller sur le Server Manager, cliquer sur Manage -> Add Roles and Features puis u
 
 ➡️ **Confirmation** : `Installer`  
 
-### ⚠️ Éteindre le serveur et aller dans les paramètres VirtualBox, puis mettre le serveur en mode d'accès `Réseau interne` et sur la carte réseau `int_vlan30`. Cela va permettre de "brancher" le serveur sur l'interface réseau du routeur interne dédiée au VLAN 30.  
+### ⚠️ Éteindre le serveur et aller dans les paramètres VirtualBox, puis mettre le serveur en mode d'accès `Réseau interne` et sur la carte réseau `int_lan30`. Cela va permettre de "brancher" le serveur sur l'interface réseau du routeur interne dédiée au LAN 30.  
 
-# :two: Création des plages d'adresses IP pour chaque VLAN  
+# :two: Création des plages d'adresses IP pour chaque LAN  
 
 ➡️ Cliquer sur `Outils` -> `DCHP`. Une fenêtre DHCP apparaît, on déroule la ligne portant le nom de notre server Windows, puis on déroule la ligne `IPv4`.  
 
 ➡️ On a 3 lignes supplémentaires qui apparaissent : `Options de serveur`, `Stratégies`, et `Filtres`  
 
-## 🧩 VLAN 10 
+## 🧩 LAN 10 
 
 ➡️ Faire un clique droit sur IPv4 et cliquer sur `Nouvelle étendue...`. Une fenêtre apparaît, cliquer sur `Suivant`  
    
-Choisir un nom pour cette plage (VLAN 10) et cliquer sur `Suivant`  
+Choisir un nom pour cette plage (LAN 10) et cliquer sur `Suivant`  
 
-Nous allons à présent configurer l'étendue d'adresses IP pour le VLAN 10. Cette opération sera répétée deux fois pour créer au total trois étendues pour nos trois VLANs.  
+Nous allons à présent configurer l'étendue d'adresses IP pour le LAN 10. Cette opération sera répétée deux fois pour créer au total trois étendues pour nos trois VLANs.  
   
 Nous voilà sur la fenêtre qui va nous permettre de définir notre plage d'adresses IP.  
 En face de `Adresse IP de début`, on rentre l'IP **192.168.10.1** et en face de `Adresse IP de fin`, on rentre l'IP **192.168.10.100**  
@@ -61,17 +61,17 @@ En face de `Adresse IP de début`, on rentre l'IP **192.168.10.1** et en face de
 
 ➡️ Cliquer sur `Suivant` jusqu'à arriver à **Routeur (passerelle par défaut)**  
 
-➡️ Ajouter l'adresse IP de l'interface VLAN 10 sur notre routeur interne : `192.168.10.254` -> `Ajouter` -> `Suivant`    
+➡️ Ajouter l'adresse IP de l'interface LAN 10 sur notre routeur interne : `192.168.10.254` -> `Ajouter` -> `Suivant`    
   
 ![dhcprouteurpasserelle](https://github.com/user-attachments/assets/326d95ee-bbbd-4a04-80f1-b85ae403309f)  
 
-## 🧩 VLAN 20  
+## 🧩 LAN 20  
 
 ![plagevlan20](https://github.com/user-attachments/assets/3c63f242-2d58-4511-b95a-2a9def37624d)  
 
 ![dchrouteurpasserellevlan20](https://github.com/user-attachments/assets/34dfbf79-bbe9-480b-a757-2ff1f38df4e9)  
   
-## 🧩 VLAN 30  
+## 🧩 LAN 30  
 
 ![plagevlan30](https://github.com/user-attachments/assets/ec5ac325-2824-471a-99c9-2e1eb9a9463e)  
 
