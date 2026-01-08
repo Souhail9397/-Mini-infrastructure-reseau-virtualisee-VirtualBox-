@@ -8,13 +8,13 @@ Par défaut, VirtualBox n'active qu'une interface réseau, qui correspond aux on
 
 • `Adapter 1` | **Mode d'accès** : `Réseau interne` | **Name** : `int_transit` : cette interface sera connectée au Routeur Externe   
 
-• `Adapter 2` | **Mode d'accès** : `Réseau interne` | **Name** : `int_vlan10` : cette interface sera connectée au VLAN 10 (Utilisateurs)    
+• `Adapter 2` | **Mode d'accès** : `Réseau interne` | **Name** : `int_lan10` : cette interface sera connectée au LAN 10 (Utilisateurs)    
 
-• `Adapter 3` | **Mode d'accès** : `Réseau interne` | **Name** : `int_vlan20` : cette interface sera connectée au VLAN 20 (Utilisateurs)   
+• `Adapter 3` | **Mode d'accès** : `Réseau interne` | **Name** : `int_lan20` : cette interface sera connectée au LAN 20 (Utilisateurs)   
 
-• `Adapter 4` | **Mode d'accès** : `Réseau interne` | **Name** : `int_vlan30` : cette interface sera connectée au VLAN 30 (Salle des serveurs)   
+• `Adapter 4` | **Mode d'accès** : `Réseau interne` | **Name** : `int_lan30` : cette interface sera connectée au LAN 30 (Salle des serveurs)   
 
-✅ Notre routeur est maintenant prêt à recevoir les modifications nécessaires pour la connection inter VLANs  
+✅ Notre routeur est maintenant prêt à recevoir les modifications nécessaires pour la connection inter LANs  
 
 # :two: Attribution des adresses IP  
 
