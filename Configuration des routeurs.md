@@ -37,8 +37,8 @@ Démarrer le routeur, se connecter en root et taper la commande `ip a`. Cette co
 ![lignesasupprimer](https://github.com/user-attachments/assets/f287af81-1a4c-48cb-9c29-3354f4890c7c)  
 
 ➡️ Modifier le fichier pour avoir cette configuration exacte :  
-
-![configfinalerouteurinterne](https://github.com/user-attachments/assets/ad3b5b01-0b1e-4426-b0a0-9a5cadffb1f5)  
+  
+![configfinalerouteurinterne](https://github.com/user-attachments/assets/100900fb-10cd-4151-8f55-0872f8e1f147)  
 
 ➡️ Appuyer sur **Ctrl + X** pour quitter, et répondre à la question **Sauver l'espace modifié ?** par `O` 
   
