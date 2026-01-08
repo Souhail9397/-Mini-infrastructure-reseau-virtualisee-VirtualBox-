@@ -81,9 +81,23 @@ En face de `Adresse IP de début`, on rentre l'IP **192.168.10.1** et en face de
 
 <details><summary><h1>Configuration d'un relais DHCP sur le routeur interne<h1></summary>    
 
-### Comme nos postes utilisateurs sont sur des VLAN différents du VLAN où se trouve notre serveur DHCP, on doit configurer un relais DHCP sur le routeur interne pour que les postes utilisateurs puissent reçevoir leurs adresses IP.  
+🧑‍🏫 **Rappel** 🧑‍🏫  
+
+➡️ **Routeur interne** : 192.168.100.253  
+
+➡️ **Interfaces VLAN** : VLAN 10 - VLAN 20 - VLAN 30  
   
-➡️ Pour commencer, vérifier toutes les interfaces du routeur avec la commande `ip a`  
+➡️ Serveur DHCP : 192.168.30.1 (VLAN 30)   
+
+➡️ Utilisateurs : VLAN 10 - VLAN 20  
+
+🎯 **Objectif** 🎯  
+
+Les clients obtiennent une IP depuis 192.168.30.1 même s'ils sont dans un autre VLAN.  
+
+🚧 **Étapes à suivre** 🚧  
+
+➡️ Taper la commande `ip a` pour avoir un aperçu de toutes les interfaces réseau    
   
 ![interfacesrouteurint](https://github.com/user-attachments/assets/f084c110-0d13-4fa6-a59b-c1e6fe44e7e0)  
 
