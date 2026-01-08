@@ -82,11 +82,12 @@ En face de `Adresse IP de début`, on rentre l'IP **192.168.10.1** et en face de
 <details><summary><h1>Configuration d'un relais DHCP sur le routeur interne<h1></summary>    
 
 ### Comme nos postes utilisateurs sont sur des VLAN différents du VLAN où se trouve notre serveur DHCP, on doit configurer un relais DHCP sur le routeur interne pour que les postes utilisateurs puissent reçevoir leurs adresses IP.  
+  
+➡️ Pour commencer, vérifier toutes les interfaces du routeur avec la commande `ip a`  
+  
+![interfacesrouteurint](https://github.com/user-attachments/assets/f084c110-0d13-4fa6-a59b-c1e6fe44e7e0)  
 
-  
-➡️
-  
+➡️ **Installer le service DHCP relay** : `apt update` & `apt install isc-dhcp-relay`  
 
-  
   
 </details>    
