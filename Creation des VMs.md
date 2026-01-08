@@ -70,7 +70,7 @@ Donc bien décocher ces deux cases, puis `Continuer`.
   
 L'installation est désormais terminée, redémarrer la machine pour pouvoir accéder au serveur.  
 
-➡️ **Nous serons amenés à répéter cette création de VM Linux une deuxième fois afin d'avoir un routeur permettant le routage inter-VLANs et un routeur permattant un accès à l'extérieur (Internet)**  
+➡️ **Nous serons amenés à répéter cette création de VM Linux une deuxième fois afin d'avoir un routeur permettant le routage inter-LANs et un routeur permattant un accès à l'extérieur (Internet)**  
 </details> 
 
 
@@ -133,7 +133,7 @@ Maintenant, les configurations finales vont avoir lieu.
   
 Après avoir terminé ces configurations, la VM sera prête à l'utilisation ✅  
 
-➡️ **Nous serons amenés à répéter cette création de VM Windows10 une fois de plus afin de simuler les deux VLANs Utilisateurs de cette mini-infra réseau**  
+➡️ **Nous serons amenés à répéter cette création de VM Windows10 une fois de plus afin de simuler les deux LANs Utilisateurs de cette mini-infra réseau**  
 
 </details>     
 
