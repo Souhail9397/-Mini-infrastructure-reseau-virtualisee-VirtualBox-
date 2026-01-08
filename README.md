@@ -3,13 +3,13 @@
 ## :one: Objectif  
 
 Ce premier projet a pour but de concevoir une mini infrastructure virtualisée à partir de VirtualBox dans un objectif de préparation a un futur homelab beaucoup plus avancé.  
-L'infrastructure sera composée dans un premier temps de 3 VLANs et d'un routeur Linux permettant un accès à Internet.  
-Les étapes de la mise en place de ce mini réseau seront documentées.  
+L'infrastructure sera composée dans un premier temps de 3 VLANs (2 utilisateurs et 1 serveurs) et de deux routeurs Debian : un pour le routage inter VLANs et un pour un accès à Internet.  
+Les étapes de la mise en place de ce mini réseau seront documentées ici.  
 
 ## :two: Techologies utilisées  
 
 - VirtualBox pour la virtualisation  
-- Debian pour le routeur  
+- Debian pour les routeurs  
 - Windows 10 pour les machines clients  
 - iptables pour NAT et routage  
 
@@ -18,16 +18,16 @@ Les étapes de la mise en place de ce mini réseau seront documentées.
 | VLAN | Nom     | Réseau IP |
 |------|---------|-----------|
 | 10   | USERS   | 192.168.10.0/24 |
-| 20   | SERVERS | 192.168.20.0/24 |
-| 30   | ADMIN   | 192.168.30.0/24 |
+| 20   | USERS   | 192.168.20.0/24 |
+| 30   | SERVERS | 192.168.30.0/24 |
 
 ## :four: État d'avancement  
 
-- [ ] Création des réseaux VirtualBox
-- [ ] Configuration IP statique
+- [x] Création des réseaux VirtualBox
+- [x] Configuration IP statique
 - [ ] Routage inter-VLAN
 - [ ] Accès Internet (NAT)
-- [ ] DHCP
+- [x] DHCP
 - [ ] DNS local
 - [ ] Firewall inter-VLAN  
 
