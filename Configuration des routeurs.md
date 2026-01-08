@@ -43,3 +43,50 @@ Démarrer le routeur, se connecter en root et taper la commande `ip a`. Cette co
 ➡️ Appuyer sur **Ctrl + X** pour quitter, et répondre à la question **Sauver l'espace modifié ?** par `O` 
   
 </details>   
+
+<details><summary><h1>Routeur Externe<h1></summary>  
+
+# :one: Configurations réseau sur VirtualBox  
+
+Aller dans les paramètres réseau du routeur externe et mettre une interface réseau en `NAT` et l'autre interface réseau en `Réseau interne` sur `int_transit`.  
+Nous nous retrouvons donc au total avec **deux** interfaces réseau sur ce routeur :  
+  
+• **Adapter 1** | `Réseau interne` | `int_transit`  
+
+• **Adapter 2** | `NAT`  
+
+
+# 2️⃣ Attribution de l'adresse IP      
+
+➡️ Taper `nano /etc/network/interfaces` pour attribuer son adresse IP (192.168.100.254) à l'interface en **Réseau interne** du routeur  
+  
+➡️ L'interface en **NAT** sera elle configurée en DHCP  
+  
+![configreseaurtrextern](https://github.com/user-attachments/assets/173e6765-98ab-4ee8-aac8-660a83457fe9)  
+  
+➡️ Quitter en sauvegardant avec `Ctrl + x` et `o` pour confirmer les modifications  
+
+➡️ Redémarrer les interfaces réseau avec la commande `systemctl restart networking`  
+
+➡️ Vérifier que le routeur a bien pris en compte les modifications apportées avec `ip a`  
+
+⚠️ Le message d'erreur suivant est susceptible d'apparaître après la commande **systemctl restart networking** :  
+`job for networking.service failed because the control process exited with error code.  
+See "systemctl status networking.service" and "journalctl -xeu networking.service" for details.`  
+
+Dans ce cas, taper la commande `ip link set enp0s3 up` puis retaper la commande `systemctl restart networking`  
+
+➡️ La commande `ip a` devrait alors donner ceci :  
+  
+![iparouteurexterne2](https://github.com/user-attachments/assets/191c6a06-8d6d-42dc-b74a-f1a35b6c48a0)  
+
+# :three: Mise en place du NAT  
+
+*Nous allons maintenant mettre en place le NAT sur le routeur externe afin que toutes les machines du réseau puissent avoir un accès à Internet en utilisant l'IP publique du routeur externe*   
+  
+  
+  
+
+  
+  
+</details>  
