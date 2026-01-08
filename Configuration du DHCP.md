@@ -52,7 +52,7 @@ Aller sur le Server Manager, cliquer sur Manage -> Add Roles and Features puis u
    
 Choisir un nom pour cette plage (LAN 10) et cliquer sur `Suivant`  
 
-Nous allons à présent configurer l'étendue d'adresses IP pour le LAN 10. Cette opération sera répétée deux fois pour créer au total trois étendues pour nos trois VLANs.  
+Nous allons à présent configurer l'étendue d'adresses IP pour le LAN 10. Cette opération sera répétée deux fois pour créer au total trois étendues pour nos trois LANs.  
   
 Nous voilà sur la fenêtre qui va nous permettre de définir notre plage d'adresses IP.  
 En face de `Adresse IP de début`, on rentre l'IP **192.168.10.1** et en face de `Adresse IP de fin`, on rentre l'IP **192.168.10.100**  
@@ -85,15 +85,15 @@ En face de `Adresse IP de début`, on rentre l'IP **192.168.10.1** et en face de
 
 ➡️ **Routeur interne** : 192.168.100.253  
 
-➡️ **Interfaces VLAN** : VLAN 10 - VLAN 20 - VLAN 30  
+➡️ **Interfaces LAN** : LAN 10 - LAN 20 - LAN 30  
   
-➡️ Serveur DHCP : 192.168.30.1 (VLAN 30)   
+➡️ Serveur DHCP : 192.168.30.1 (LAN 30)   
 
-➡️ Utilisateurs : VLAN 10 - VLAN 20  
+➡️ Utilisateurs : LAN 10 - LAN 20  
 
 🎯 **Objectif** 🎯  
 
-Les clients obtiennent une IP depuis 192.168.30.1 même s'ils sont dans un autre VLAN.  
+Les clients obtiennent une IP depuis 192.168.30.1 même s'ils sont dans un autre LAN.  
 
 🚧 **Étapes à suivre** 🚧  
 
