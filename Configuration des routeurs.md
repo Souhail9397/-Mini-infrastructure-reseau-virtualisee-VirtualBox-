@@ -80,9 +80,32 @@ Dans ce cas, taper la commande `ip link set enp0s3 up` puis retaper la commande 
   
 ![iparouteurexterne2](https://github.com/user-attachments/assets/191c6a06-8d6d-42dc-b74a-f1a35b6c48a0)  
 
+⚠️ **On peut voir que l'interface réseau en NAT **enp0s8** n'a pas d'adresse IP, il nous est donc impossible d'accéder à Internet**  
+
+➡️ Taper `ifdown enp0s8 && ifup enp0s8` pour activer & désactiver la carte réseau enp0s8. Après cette commande, l'interface enp0s8 devrait avoir une adresse IP, et l'accès à Internet devra être possible (vérifier avec la commande `ip &` puis `ping 8.8.8.8`)  
+  
+![adresseipenp0s8](https://github.com/user-attachments/assets/58b9ad40-13ff-478e-8896-2d61eed56762)
+  
+![ping8888](https://github.com/user-attachments/assets/cc6925fc-373b-4c42-a0b9-48a74de7b55d)  
+  
 # :three: Mise en place du NAT  
 
-*Nous allons maintenant mettre en place le NAT sur le routeur externe afin que toutes les machines du réseau puissent avoir un accès à Internet en utilisant l'IP publique du routeur externe*   
+*Nous allons maintenant mettre en place le NAT sur le routeur externe afin que toutes les machines du réseau puissent avoir un accès à Internet en utilisant l'IP publique du routeur externe*  
+  
+➡️ **Activer le forwarding IP** : `sysctl -w net.ipv4.ip_forward=1` -> le terminal devrait répondre avec `net.ipv4.ip_forward = 1`  
+
+➡️ **Autoriser le forwarding en permanence après reboot** : `echo "net.ipv4.ip_forward=1" | tee -a /etc/systemctl.conf` puis `sysctl -p`  
+
+➡️ **Télécharger iptables** : `apt update` puis `apt install iptables -y`  
+
+➡️ **Activer le NAT pour le réseau int_transit** : `iptables -t nat -A POSTROUTING -s 192.168.100.252/30 -o enp0s8 -j MASQUERADE`  
+
+➡️ **Activer le NAT pour le LAN 192.168.10.0/24** : `iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o enp0s8 -j MASQUERADE`  
+
+➡️ **Activer le NAT pour le LAN 192.168.20.0/24** : `iptables -t nat -A POSTROUTING -s 192.168.20.0/24 -o enp0s8 -j MASQUERADE`    
+
+➡️ **Activer le NAT pour le LAN 192.168.30.0/24** : `iptables -t nat -A POSTROUTING -s 192.168.30.0/24 -o enp0s8 -j MASQUERADE`    
+
   
   
   
