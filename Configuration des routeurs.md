@@ -104,7 +104,23 @@ Dans ce cas, taper la commande `ip link set enp0s3 up` puis retaper la commande 
 
 ➡️ **Activer le NAT pour le LAN 192.168.20.0/24** : `iptables -t nat -A POSTROUTING -s 192.168.20.0/24 -o enp0s8 -j MASQUERADE`    
 
-➡️ **Activer le NAT pour le LAN 192.168.30.0/24** : `iptables -t nat -A POSTROUTING -s 192.168.30.0/24 -o enp0s8 -j MASQUERADE`    
+➡️ **Activer le NAT pour le LAN 192.168.30.0/24** : `iptables -t nat -A POSTROUTING -s 192.168.30.0/24 -o enp0s8 -j MASQUERADE`  
+
+➡️ **Vérifier que les règles mises en place fonctionnent avec la commande** `iptables -t nat -L -n -v`  
+
+![reglesnat](https://github.com/user-attachments/assets/be03171b-d005-401f-b00a-3c3277c19204)  
+
+➡️ **Sauvegarder les règles afin qu'elles soient prises en compte après un reboot** : `apt install iptables-persistent` puis `netfilter-persistent save`  
+
+⚠️ **Répondre `Oui` à cette question** :  
+  
+![configurationiptablespersistent](https://github.com/user-attachments/assets/48a74eb7-9e71-46e2-8621-1ae60145d034)  
+
+  
+
+
+  
+
 
   
   
