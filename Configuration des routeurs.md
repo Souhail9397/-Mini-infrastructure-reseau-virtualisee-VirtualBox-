@@ -40,7 +40,25 @@ Démarrer le routeur, se connecter en root et taper la commande `ip a`. Cette co
   
 ![configfinalerouteurinterne](https://github.com/user-attachments/assets/100900fb-10cd-4151-8f55-0872f8e1f147)  
 
-➡️ Appuyer sur **Ctrl + X** pour quitter, et répondre à la question **Sauver l'espace modifié ?** par `O` 
+➡️ Appuyer sur **Ctrl + X** pour quitter, et répondre à la question **Sauver l'espace modifié ?** par `O`  
+
+# :three: Attribution d'un DNS  
+
+➡️ **Configurer un DNS dans le fichier de configuration** : `nano /etc/resolv.conf` et ajouter la ligne `nameserver 8.8.8.8`  
+  
+# :four: Autoriser le forwarding IP sur le routeur interne  
+
+🔛 **Cette étape va permettre à notre routeur interne de transmettre les paquets des LAN 10, 20 et 30 une fois qu'il les reçoit. Par défaut, le forwarding (la transmission) est désactivée sur Linux**  
+
+➡️ **Activer le forwarding IP** : `sysctl -w net.ipv4.ip_forward=1` -> le terminal devrait répondre avec `net.ipv4.ip_forward = 1`  
+
+➡️ **Autoriser le forwarding en permanence après reboot** : `echo "net.ipv4.ip_forward=1" | tee -a /etc/sysctl.conf` puis `sysctl -p`  
+
+➡️ **Création d'un fichier pour qu'il soit lu en dernier lors du boot, et que *net.ipv4.ip_forward* ne soit pas écrasé par un fichier prioritaire lors du boot, ce qui empêcherait l'IP forwarding** : `nano /etc/sysctl.d/99-ipforward.conf` et mettre dedans `net.ipv4.ip_forward=1`  
+
+➡️ **Redémarrer le routeur** : `init 6`    
+
+  
   
 </details>   
 
@@ -94,7 +112,7 @@ Dans ce cas, taper la commande `ip link set enp0s3 up` puis retaper la commande 
   
 ➡️ **Activer le forwarding IP** : `sysctl -w net.ipv4.ip_forward=1` -> le terminal devrait répondre avec `net.ipv4.ip_forward = 1`  
 
-➡️ **Autoriser le forwarding en permanence après reboot** : `echo "net.ipv4.ip_forward=1" | tee -a /etc/systemctl.conf` puis `sysctl -p`  
+➡️ **Autoriser le forwarding en permanence après reboot** : `echo "net.ipv4.ip_forward=1" | tee -a /etc/sysctl.conf` puis `sysctl -p`  
 
 ➡️ **Télécharger iptables** : `apt update` puis `apt install iptables -y`  
 
@@ -106,6 +124,15 @@ Dans ce cas, taper la commande `ip link set enp0s3 up` puis retaper la commande 
 
 ➡️ **Activer le NAT pour le LAN 192.168.30.0/24** : `iptables -t nat -A POSTROUTING -s 192.168.30.0/24 -o enp0s8 -j MASQUERADE`  
 
+➡️ **Autoriser la sortie des LAN vers Internet** :  
+
+`iptables -A FORWARD -s 192.168.100.252/30 -o enp0s8 -j ACCEPT`  
+`iptables -A FORWARD -s 192.168.10.0/24 -o enp0s8 -j ACCEPT`  
+`iptables -A FORWARD -s 192.168.20.0/24 -o enp0s8 -j ACCEPT`  
+`iptables -A FORWARD -s 192.168.30.0/24 -o enp0s8 -j ACCEPT`  
+
+➡️ **Autoriser le trafic retour** : `iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT`  
+
 ➡️ **Vérifier que les règles mises en place fonctionnent avec la commande** `iptables -t nat -L -n -v`  
 
 ![reglesnat](https://github.com/user-attachments/assets/be03171b-d005-401f-b00a-3c3277c19204)  
@@ -115,9 +142,10 @@ Dans ce cas, taper la commande `ip link set enp0s3 up` puis retaper la commande 
 ⚠️ **Répondre `Oui` à cette question** :  
   
 ![configurationiptablespersistent](https://github.com/user-attachments/assets/48a74eb7-9e71-46e2-8621-1ae60145d034)  
-
   
+➡️ **Création d'un fichier pour qu'il soit lu en dernier lors du boot, et que *net.ipv4.ip_forward* ne soit pas écrasé par un fichier prioritaire lors du boot, ce qui empêcherait l'IP forwarding** : `nano /etc/sysctl.d/99-ipforward.conf` et mettre dedans `net.ipv4.ip_forward=1`  
 
+➡️ **Redémarrer la carte réseau** : `ifdown enp0s3 && ifup enp0s3`    
 
   
 
