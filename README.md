@@ -25,8 +25,8 @@ Les étapes de la mise en place de ce mini réseau seront documentées ici.
 
 - [x] Création des réseaux VirtualBox
 - [x] Configuration IP statique
-- [ ] Routage inter-LAN
-- [ ] Accès Internet (NAT)
+- [x] Routage inter-LAN
+- [x] Accès Internet (NAT)
 - [x] DHCP
 - [ ] DNS local
 - [ ] Firewall inter-LAN  
