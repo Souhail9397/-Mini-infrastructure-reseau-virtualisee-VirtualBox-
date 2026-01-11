@@ -61,22 +61,23 @@ Démarrer le routeur, se connecter en root et taper la commande `ip a`. Cette co
 *Par défaut, Linux bloque certains paquets entrants jugés suspects selon leur chemin retour. Nous allons désactiver ce filtre pour tous les paquets en provenance et à destination de tous nos LAN*  
   
 ➡️ **Taper les commandes suivantes** : 
-
+  
 `sysctl -w net.ipv4.conf.enp0s3.rp_filter=0`  
 `sysctl -w net.ipv4.conf.enp0s8.rp_filter=0`  
 `sysctl -w net.ipv4.conf.enp0s9.rp_filter=0`    
 `sysctl -w net.ipv4.conf.enp0s10.rp_filter=0`  
 `sysctl -w net.ipv4.conf.default.rp_filter=0`  
-
+  
 ➡️ **Rendre le filtre désactivé à chaque boot du serveur** : créer un fichier `nano /etc/sysctl.d/99-rpfilter.conf` et y entrer les lignes suivantes :  
-``
+`net.ipv4.conf.all.rp_filter=0`  
+`net.ipv4.conf.default.rp_filter=0`  
+`net.ipv4.conf.enp0s3.rp_filter=0`  
+`net.ipv4.conf.enp0s8.rp_filter=0`  
+`net.ipv4.conf.enp0s9.rp_filter=0`  
+`net.ipv4.conf.enp0s10.rp_filter=0`  
 
-
-  
-  
-
-  
-  
+➡️ **Appliquer les changements avec** : `sysctl --system` 
+    
 </details>   
 
 <details><summary><h1>Routeur Externe<h1></summary>  
@@ -126,11 +127,15 @@ Dans ce cas, taper la commande `ip link set enp0s3 up` puis retaper la commande 
 # :three: Mise en place du NAT  
 
 *Nous allons maintenant mettre en place le NAT sur le routeur externe afin que toutes les machines du réseau puissent avoir un accès à Internet en utilisant l'IP publique du routeur externe*  
+
+## ➡️ Autoriser le trafic sortant  
   
 ➡️ **Activer le forwarding IP** : `sysctl -w net.ipv4.ip_forward=1` -> le terminal devrait répondre avec `net.ipv4.ip_forward = 1`  
 
 ➡️ **Autoriser le forwarding en permanence après reboot** : `echo "net.ipv4.ip_forward=1" | tee -a /etc/sysctl.conf` puis `sysctl -p`  
 
+➡️ **Création d'un fichier pour qu'il soit lu en dernier lors du boot, et que *net.ipv4.ip_forward* ne soit pas écrasé par un fichier prioritaire lors du boot, ce qui empêcherait l'IP forwarding** : `nano /etc/sysctl.d/99-ipforward.conf` et mettre dedans `net.ipv4.ip_forward=1`    
+  
 ➡️ **Télécharger iptables** : `apt update` puis `apt install iptables -y`  
 
 ➡️ **Activer le NAT pour le réseau int_transit** : `iptables -t nat -A POSTROUTING -s 192.168.100.252/30 -o enp0s8 -j MASQUERADE`  
@@ -148,20 +153,41 @@ Dans ce cas, taper la commande `ip link set enp0s3 up` puis retaper la commande 
 `iptables -A FORWARD -s 192.168.20.0/24 -o enp0s8 -j ACCEPT`  
 `iptables -A FORWARD -s 192.168.30.0/24 -o enp0s8 -j ACCEPT`  
 
-➡️ **Autoriser le trafic retour** : `iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT`  
+## ⬅️ Autoriser le trafic entrant  
+  
+➡️ **Autoriser le trafic retour des paquets venant d'Internet** : `iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT`  
 
 ➡️ **Vérifier que les règles mises en place fonctionnent avec la commande** `iptables -t nat -L -n -v`  
 
 ![reglesnat](https://github.com/user-attachments/assets/be03171b-d005-401f-b00a-3c3277c19204)  
 
+⚠️ **La commande `iptables -t nat -L -n -v` peut être amenée à ne plus fonctionner si elle est tapée de nouveau. Essayer dans ce cas avec la commande `nft list ruleset`**  
+
+➡️ **Configurer les routes retour en tapant les lignes** :  
+`ip route add 192.168.10.0/24 via 192.168.100.253`  
+`ip route add 192.168.20.0/24 via 192.168.100.253`  
+`ip route add 192.168.30.0/24 via 192.168.100.253`  
+
+➡️ **Automatiser la désactivation et la réactivation des routes lors d'un redémarrage de l'interface enp0s3, afin d'éviter des doublons** : `nano /etc/network/interfaces`  
+
+➡️ **Repérer l'interface enp0s3 et écrire en dessous les lignes suivantes** :  
+`post-up ip route add 192.168.10.0/24 via 192.168.100.253`  
+`post-up ip route add 192.168.20.0/24 via 192.168.100.253`  
+`post-up ip route add 192.168.30.0/24 via 192.168.100.253`  
+`post-down ip route add 192.168.10.0/24 via 192.168.100.253`  
+`post-down ip route add 192.168.20.0/24 via 192.168.100.253`  
+`post-down ip route add 192.168.30.0/24 via 192.168.100.253`  
+
+➡️ **Vérifier que les routes sont actives et sans doublon après un reboot** : `ifdown enp0s3 && ifup enp0s3` puis `ip route`. Si ces 3 lignes apparaîssent, alors la configuration du fichier `/etc/network/interface` est bien prise en compte à chaque démarrage de l'interface enp0s3 ✅  
+  
+![iproute](https://github.com/user-attachments/assets/997588ef-0c58-4047-bf85-1c8d7db7d5be)
+  
 ➡️ **Sauvegarder les règles afin qu'elles soient prises en compte après un reboot** : `apt install iptables-persistent` puis `netfilter-persistent save`  
 
 ⚠️ **Répondre `Oui` à cette question** :  
   
 ![configurationiptablespersistent](https://github.com/user-attachments/assets/48a74eb7-9e71-46e2-8621-1ae60145d034)  
   
-➡️ **Création d'un fichier pour qu'il soit lu en dernier lors du boot, et que *net.ipv4.ip_forward* ne soit pas écrasé par un fichier prioritaire lors du boot, ce qui empêcherait l'IP forwarding** : `nano /etc/sysctl.d/99-ipforward.conf` et mettre dedans `net.ipv4.ip_forward=1`  
-
 ➡️ **Redémarrer la carte réseau** : `ifdown enp0s3 && ifup enp0s3`    
 
   
