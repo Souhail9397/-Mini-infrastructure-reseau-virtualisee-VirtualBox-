@@ -118,7 +118,7 @@ Dans ce cas, taper la commande `ip link set enp0s3 up` puis retaper la commande 
 
 ⚠️ **On peut voir que l'interface réseau en NAT **enp0s8** n'a pas d'adresse IP, il nous est donc impossible d'accéder à Internet**  
 
-➡️ Taper `ifdown enp0s8 && ifup enp0s8` pour activer & désactiver la carte réseau enp0s8. Après cette commande, l'interface enp0s8 devrait avoir une adresse IP, et l'accès à Internet devra être possible (vérifier avec la commande `ip &` puis `ping 8.8.8.8`)  
+➡️ Taper `ifdown enp0s8 && ifup enp0s8` pour activer & désactiver la carte réseau enp0s8. Après cette commande, l'interface enp0s8 devrait avoir une adresse IP, et l'accès à Internet devra être possible (vérifier avec la commande `ip a` puis `ping 8.8.8.8`)  
   
 ![adresseipenp0s8](https://github.com/user-attachments/assets/58b9ad40-13ff-478e-8896-2d61eed56762)
   
@@ -174,13 +174,19 @@ Dans ce cas, taper la commande `ip link set enp0s3 up` puis retaper la commande 
 `post-up ip route add 192.168.10.0/24 via 192.168.100.253`  
 `post-up ip route add 192.168.20.0/24 via 192.168.100.253`  
 `post-up ip route add 192.168.30.0/24 via 192.168.100.253`  
-`post-down ip route add 192.168.10.0/24 via 192.168.100.253`  
-`post-down ip route add 192.168.20.0/24 via 192.168.100.253`  
-`post-down ip route add 192.168.30.0/24 via 192.168.100.253`  
+`post-down ip route del 192.168.10.0/24 via 192.168.100.253`  
+`post-down ip route del 192.168.20.0/24 via 192.168.100.253`  
+`post-down ip route del 192.168.30.0/24 via 192.168.100.253`  
 
-➡️ **Vérifier que les routes sont actives et sans doublon après un reboot** : `ifdown enp0s3 && ifup enp0s3` puis `ip route`. Si ces 3 lignes apparaîssent, alors la configuration du fichier `/etc/network/interface` est bien prise en compte à chaque démarrage de l'interface enp0s3 ✅  
+➡️ **Voici à quoi devrait ressembler le fichier `/etc/network/interfaces`** :  
   
-![iproute](https://github.com/user-attachments/assets/997588ef-0c58-4047-bf85-1c8d7db7d5be)
+![networkinterfaces](https://github.com/user-attachments/assets/c4b209b4-9d76-41c3-b27d-93aac7b926a6)
+
+
+➡️ **Vérifier que les routes sont actives et sans doublon après un reboot** : `ifdown enp0s3 && ifup enp0s3` puis `ip route`. Si ces 6 lignes apparaîssent, alors la configuration du fichier `/etc/network/interface` est bien prise en compte à chaque démarrage de l'interface enp0s3 ✅  
+  
+![iproute](https://github.com/user-attachments/assets/f88f093c-2da0-41d6-ac19-2385f2c729af)  
+
   
 ➡️ **Sauvegarder les règles afin qu'elles soient prises en compte après un reboot** : `apt install iptables-persistent` puis `netfilter-persistent save`  
 
