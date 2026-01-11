@@ -27,7 +27,7 @@ Les étapes de la mise en place de ce mini réseau seront documentées ici.
 - [x] Configuration IP statique
 - [x] Routage inter-LAN
 - [x] Accès Internet (NAT)
-- [x] DHCP
+- [ ] DHCP
 - [ ] DNS local
 - [ ] Firewall inter-LAN  
 
