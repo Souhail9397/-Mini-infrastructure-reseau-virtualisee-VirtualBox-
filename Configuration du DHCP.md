@@ -72,15 +72,15 @@ En face de `Adresse IP de début`, on rentre l'IP **192.168.10.1** et en face de
 ![dchrouteurpasserellevlan20](https://github.com/user-attachments/assets/34dfbf79-bbe9-480b-a757-2ff1f38df4e9)  
   
 ## 🧩 LAN 30  
-
-![plagevlan30](https://github.com/user-attachments/assets/ec5ac325-2824-471a-99c9-2e1eb9a9463e)  
-
-![dhcprouteurpasserellevlan30](https://github.com/user-attachments/assets/a036b463-b778-42f4-926f-e970884ab4cf)
-
+  
+⚠️ **On ne crée PAS d'étendue pour le LAN 30 car tous les serveurs qui s'y trouveront auront une adresse IP fixe et non dynamique**   
+  
 </details>  
 
 <details><summary><h1>Configuration d'un relais DHCP sur le routeur interne<h1></summary>    
 
+## :warning: Avant de passer à cette étape, il faut bien avoir terminé toutes les configurations sur les deux routeurs ⚠️  
+  
 🧑‍🏫 **Rappel** 🧑‍🏫  
 
 ➡️ **Routeur interne** : 192.168.100.253  
@@ -103,5 +103,38 @@ Les clients obtiennent une IP depuis 192.168.30.1 même s'ils sont dans un autre
 
 ➡️ **Installer le service DHCP relay** : `apt update` & `apt install isc-dhcp-relay`  
 
+➡️ **Serveurs DHCP auxquels faire suivre les requêtes de relais DHCP** : `192.168.30.1`  
+
+➡️ **Interface où le relais DHCP sera à l'écoute** : `enp0s8 enp0s9`  
+
+➡️ **Options supplémentaires pour le démon de relais DHCP** : laisser vide, puis `Ok`  
+
+➡️ **Vérifier la configuration du DHCP Relay** : taper `nano /etc/default/isc-dhcp-relay`. Nous devons avoir la configuration suivante :  
+
+![iscdhcprelay](https://github.com/user-attachments/assets/7db33299-457e-43ac-ad26-549637970284)  
+
+📌 *La ligne "INTERFACES" ne comporte que "enp0s8 enp0s9" car ce sont les deux LAN qui demanderont des adresses IP au serveur DHCP. Les machines du LAN 30 (serveurs) auront des IP fixes*  
+
+➡️ **Quitter le fichier avec `Ctrl + X`  
+
+➡️ **Redémarrer le service DHCP Relay** : `systemctl restart isc-dhcp-relay`  
+
+➡️ **Vérifier le statut du DHCP Relay** : `systemctl status isc-dhcp-relay`. Le statut du DHCP Relay doit être en **"active (running)"**  
+
+![iscstatus](https://github.com/user-attachments/assets/1415da06-3d23-456f-a1f6-b6b4095f2492)  
+
+➡️ **Création de règles iptables pour autoriser le DHCP** : `iptables -A INPUT -p udp --dport 67:68 -j ACCEPT` puis `iptables -A OUTPUT -p udp --dport 67:68 -j ACCEPT`  
+
+➡️ **Sauvegarder les règles** : télécharger le paquet `apt install iptables-persistent`  
+
+➡️ **Faut-il enregistrer les règles IPv4 actuelles ?** : `Oui`  
+
+➡️ **Faut-il enregistrer les règles IPv6 actuelles ?** : `Oui`    
+
+  
+  
+  
+
+  
   
 </details>    
