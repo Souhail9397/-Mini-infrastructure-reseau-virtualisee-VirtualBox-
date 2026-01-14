@@ -56,7 +56,15 @@ Démarrer le routeur, se connecter en root et taper la commande `ip a`. Cette co
 
 ➡️ **Création d'un fichier pour qu'il soit lu en dernier lors du boot, et que *net.ipv4.ip_forward* ne soit pas écrasé par un fichier prioritaire lors du boot, ce qui empêcherait l'IP forwarding** : `nano /etc/sysctl.d/99-ipforward.conf` et mettre dedans `net.ipv4.ip_forward=1`  
 
-# :five: 🛡️ Désactiver les restrictions Linux bloquant le retour des paquets  
+# :five: Table de routage  
+
+➡️ **Créer les routes pour tous nos LANs** :  
+`ip route add 192.168.10.0/24 dev enp0s8 src 192.168.10.254`  
+`ip route add 192.168.20.0/24 dev enp0s8 src 192.168.20.254`  
+`ip route add 192.168.30.0/24 dev enp0s8 src 192.168.30.254`  
+`ip route add 192.168.100.252/30 dev enp0s8 src 192.168.100.253`  
+  
+# 6️⃣: 🛡️ Désactiver les restrictions Linux bloquant le retour des paquets  
 
 *Par défaut, Linux bloque certains paquets entrants jugés suspects selon leur chemin retour. Nous allons désactiver ce filtre pour tous les paquets en provenance et à destination de tous nos LAN*  
   
