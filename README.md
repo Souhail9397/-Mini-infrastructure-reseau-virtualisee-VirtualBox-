@@ -38,7 +38,7 @@ Voici un schéma de l'infrastructure, qui sera amené à évoluer au fur et à m
 ![Schema](https://github.com/user-attachments/assets/56966d5c-073f-4dfe-8652-45eee1eaf893)  
   
 
-## :five: English summary  
+## 6️⃣ English summary  
 
 This first project is meant to build a small virtualized network infrastructure from VirtualBox, in order to prepare a future homelab very much more elaborated.  
 The infrastructure will be composed in the first place with 3 VLANs and one Linux router giving an access to the Internet.  
