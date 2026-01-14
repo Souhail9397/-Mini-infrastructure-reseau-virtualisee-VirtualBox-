@@ -72,8 +72,50 @@ En face de `Adresse IP de début`, on rentre l'IP **192.168.10.1** et en face de
 ![dchrouteurpasserellevlan20](https://github.com/user-attachments/assets/34dfbf79-bbe9-480b-a757-2ff1f38df4e9)  
   
 ## 🧩 LAN 30  
-  
+
 ⚠️ **On ne crée PAS d'étendue pour le LAN 30 car tous les serveurs qui s'y trouveront auront une adresse IP fixe et non dynamique**   
+
+# :three: Création de règles pare-feu
+
+*Nous devons créer deux règles pare-feu nécessaires au bon fonctionnement de notre DHCP. L'une pour écouter sur les ports 67 et 68, et l'autre pour autoriser le trafic entrant ICMP*  
+
+## 🎧 Écouter sur les ports 67 et 68  
+
+➡️ Ouvrir **Pare-feu Windows Defender avec fonctions avancées de sécurité** en tant qu'Administrateur  
+  
+➡️ Aller dans **Règles de trafic entrant**  
+
+➡️ Cliquer sur **Nouvelle règle**  
+
+➡️ **Quel type de règle voulez-vous créer ?** : `Port`  
+
+➡️ : **Cette règle s'applique-t-elle à TCP ou UDP ?** : `UDP`  
+
+➡️ **Ports locaux spécifiques** : 67, 68  
+
+➡️ **Quelle action entreprendre lorsqu'une connexion répond aux conditions spécifiées ?** : `Autoriser la connexion`  
+
+➡️ **Quand cette règle est-elle appliquée ?** : `Domaine` et `Privé`  
+
+➡️ **Nom** : `Autoriser DHCP UDP 67-68`  
+
+## 📡 Autoriser le trafic entrant ICMP  
+
+➡️ Cliquer sur **Nouvelle règle**  
+
+➡️ **Quel type de règle voulez-vous créer ?** : `Personnalisée`   
+
+➡️ **Cette règle s'applique-t-elle à tous les programmes ou à un programme spécifique ?** : `Tous les programmes`  
+
+➡️ **Type de protocole** : `ICMPv4`  
+
+➡️ **A quelles adresses IP locales/distantes cette règle s'applique-t-elle ?** : Laisser sur `Toute adresse IP`  
+
+➡️ **Quelle action entreprendre lorsqu'une connexion répond aux conditions spécifiées ?** : `Autoriser la connexion`    
+
+➡️ **Quand cette règle est-elle appliquée ?** : `Domaine` et `Privé`  
+
+➡️ **Nom** : `Autoriser ICMP`  
   
 </details>  
 
