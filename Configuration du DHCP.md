@@ -105,13 +105,14 @@ Les clients obtiennent une IP depuis 192.168.30.1 même s'ils sont dans un autre
 
 ➡️ **Serveurs DHCP auxquels faire suivre les requêtes de relais DHCP** : `192.168.30.1`  
 
-➡️ **Interface où le relais DHCP sera à l'écoute** : `enp0s8 enp0s9`  
+➡️ **Interface où le relais DHCP sera à l'écoute** : `enp0s8 enp0s9 enp0s10`  
 
 ➡️ **Options supplémentaires pour le démon de relais DHCP** : laisser vide, puis `Ok`  
 
 ➡️ **Vérifier la configuration du DHCP Relay** : taper `nano /etc/default/isc-dhcp-relay`. Nous devons avoir la configuration suivante :  
 
-![iscdhcprelay](https://github.com/user-attachments/assets/7db33299-457e-43ac-ad26-549637970284)  
+![iscdhcprelay](https://github.com/user-attachments/assets/9e73c594-a5c7-46cd-bb36-3ffe2f29c949)  
+  
 
 📌 *La ligne "INTERFACES" ne comporte que "enp0s8 enp0s9" car ce sont les deux LAN qui demanderont des adresses IP au serveur DHCP. Les machines du LAN 30 (serveurs) auront des IP fixes*  
 
@@ -121,8 +122,8 @@ Les clients obtiennent une IP depuis 192.168.30.1 même s'ils sont dans un autre
 
 ➡️ **Vérifier le statut du DHCP Relay** : `systemctl status isc-dhcp-relay`. Le statut du DHCP Relay doit être en **"active (running)"**  
 
-![iscstatus](https://github.com/user-attachments/assets/1415da06-3d23-456f-a1f6-b6b4095f2492)  
-
+![iscstatus](https://github.com/user-attachments/assets/97ec2671-410c-4f40-af97-9c29025365fd)  
+  
 ➡️ **Création de règles iptables pour autoriser le DHCP** : `iptables -A INPUT -p udp --dport 67:68 -j ACCEPT` puis `iptables -A OUTPUT -p udp --dport 67:68 -j ACCEPT`  
 
 ➡️ **Sauvegarder les règles** : télécharger le paquet `apt install iptables-persistent`  
