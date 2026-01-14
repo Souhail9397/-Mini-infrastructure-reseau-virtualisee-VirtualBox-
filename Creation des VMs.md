@@ -133,8 +133,6 @@ Maintenant, les configurations finales vont avoir lieu.
   
 Après avoir terminé ces configurations, la VM sera prête à l'utilisation ✅  
 
-➡️ **Nous serons amenés à répéter cette création de VM Windows10 une fois de plus afin de simuler les deux LANs Utilisateurs de cette mini-infra réseau**  
-
 </details>     
 
 <details><summary><h1>🌐 Création du serveur Windows DHCP et DNS<h1></summary>  
