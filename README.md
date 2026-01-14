@@ -18,7 +18,7 @@ Les étapes de la mise en place de ce mini réseau seront documentées ici.
 | LAN | Nom     | Réseau IP |
 |------|---------|-----------|
 | 10   | USERS   | 192.168.10.0/24 |
-| 20   | USERS   | 192.168.20.0/24 |
+| 20   | ADMIN   | 192.168.20.0/24 |
 | 30   | SERVERS | 192.168.30.0/24 |
 
 ## :four: État d'avancement  
