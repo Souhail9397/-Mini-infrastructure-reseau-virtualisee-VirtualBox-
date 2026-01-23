@@ -29,11 +29,11 @@ Les étapes de la mise en place de ce mini réseau seront documentées ici.
 - [x] Accès Internet (NAT)
 - [x] DHCP
 - [x] Firewall inter-LAN  
-- [] Zabbix  
-- [] GLPI  
-- [] DNS local  
-- [] iRedMail ?  
-- [] FreePBX ?  
+- [ ] Zabbix  
+- [ ] GLPI  
+- [ ] DNS local  
+- [ ] iRedMail ?  
+- [ ] FreePBX ?  
 
 
 ## :five: Schéma de l'infrastructure  
