@@ -56,6 +56,16 @@ Voici un tableau le trafic autorisé que nous voulons avoir sur notre infrastruc
 `iptables -A FORWARD -s 192.168.20.0/24 -d 0.0.0.0/0 -j ACCEPT`  
 `iptables -A FORWARD -s 192.168.30.0/24 -d 0.0.0.0/0 -j ACCEPT`  
 
+__________________________________  
+
+### ⚠️ Il faut maintenant enregistrer ces règles fraîchement établies afin qu'elles ne soient pas perdues au prochain redémarrage du routeur  
+
+➡️ **Créer une copie backup de l'ancien fichier /etc/iptables/rules.v4** : `cp /etc/iptables/rules.v4 /etc/iptables/rules.v4.backup`    
+
+➡️ **Sauvegarder les règles** : `iptables-save > /etc/iptables/rules.v4`     
+
+➡️ **Redémarrer le routeur puis tester chaque ping pour vérifier que tout fonctionne correctement** : `init 6`     
+  
 ### 📊 Résultat :  
 - LAN 10 vers LAN 20 : Non  
 - LAN 10 vers LAN 30 : Non  
