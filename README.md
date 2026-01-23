@@ -35,9 +35,8 @@ Les étapes de la mise en place de ce mini réseau seront documentées ici.
 
 Voici un schéma de l'infrastructure, qui sera amené à évoluer au fur et à mesure que de nouveaux services viendront s'ajouter.  
 
-![Schema](https://github.com/user-attachments/assets/56966d5c-073f-4dfe-8652-45eee1eaf893)  
+![Schema](https://github.com/user-attachments/assets/26e6cc70-4a0d-45af-b286-9b42172caa6d)
   
-
 ## 6️⃣ English summary  
 
 This first project is meant to build a small virtualized network infrastructure from VirtualBox, in order to prepare a future homelab very much more elaborated.  
