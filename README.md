@@ -29,7 +29,7 @@ Les étapes de la mise en place de ce mini réseau seront documentées ici.
 - [x] Accès Internet (NAT)
 - [x] DHCP
 - [ ] DNS local
-- [ ] Firewall inter-LAN  
+- [x] Firewall inter-LAN  
 
 ## :five: Schéma de l'infrastructure  
 
