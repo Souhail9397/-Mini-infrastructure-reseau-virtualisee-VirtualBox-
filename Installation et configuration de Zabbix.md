@@ -65,7 +65,9 @@
 
 ➡️ **Quitter et sauvegarder le fichier** : `Alt + X` puis `o`  
 
-➡️ **Démarrer et activer les services** : `systemctl restart zabbix-server zabbix-agent apache2 mariadb` et `systemctl enable zabbix-server zabbix-agent apache2 mariadb`  
+➡️ **Démarrer et activer les services** :  
+`systemctl restart zabbix-server zabbix-agent apache2 mariadb`  
+`systemctl enable zabbix-server zabbix-agent apache2 mariadb`  
 
   
 
