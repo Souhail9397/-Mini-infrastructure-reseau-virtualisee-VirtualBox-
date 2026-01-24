@@ -70,7 +70,7 @@ Donc bien décocher ces deux cases, puis `Continuer`.
   
 L'installation est désormais terminée, redémarrer la machine pour pouvoir accéder au serveur.  
 
-➡️ **Nous serons amenés à répéter cette création de VM Linux une deuxième fois afin d'avoir un routeur permettant le routage inter-LANs et un routeur permattant un accès à l'extérieur (Internet)**  
+➡️ **Sur VirtualBox, clôner cette VM afin d'avoir deux routeurs : routeur permettant le routage inter-LANs et routeur permattant un accès à l'extérieur (Internet)**  
 </details> 
 
 
