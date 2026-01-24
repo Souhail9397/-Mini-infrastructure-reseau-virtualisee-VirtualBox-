@@ -26,8 +26,10 @@
 
 # :three: Attribution d'un DNS  
 
-➡️ **Configurer un DNS dans le fichier de configuration** : `nano /etc/resolv.conf` et ajouter la ligne `nameserver 8.8.8.8`    
+➡️ **Configurer un DNS dans le fichier de configuration** : `nano /etc/resolv.conf` et ajouter la ligne `nameserver 8.8.8.8`   
 ➡️ **Quitter et sauvegarder** : `Alt + X` `o`    
+
+➡️ **Redémarrer le serveur** : `init 6`  
   
 # 4️⃣ Installation de Zabbix  
 
@@ -38,27 +40,34 @@
 ➡️ **Mettre à jour la liste des paquets** : `apt update`  
 
 ➡️  **Installation de tous les modules nécessaires** :
-`apt install -y \
-zabbix-server-mysql \
-zabbix-frontend-php \
-zabbix-apache-conf \
-zabbix-agent \
-mariadb-server
-`  
-
+`apt install -y zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-agent zabbix-sql-scripts mariadb-server`  
+  
 ### 🗄️ Configuration de la base de données MySQL    
   
 ➡️  **Démarrer le client MySQL** : `mysql`  
 
 ➡️  **Créer la base Zabbix** : `CREATE DATABASE zabbix CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;`  
 
-➡️ **Créer l'utilisateur Admin** : `CREATE USER 'zabbix'@'localhost' IDENTIFIED BY 'MotDePasseSolide';`  
+➡️ **Créer un utilisateur dans MySQL** : `CREATE USER 'zabbix'@'localhost' IDENTIFIED BY 'MotDePasseSolide';`  
 
-➡️ **Donner tous les droits à l'utilisateur Admin** : `GRANT ALL PRIVILEGES ON zabbix.* TO 'zabbix'@'admin';`  
+➡️ **Donner tous les droits à l'utilisateur Admin** : `GRANT ALL PRIVILEGES ON zabbix.* TO 'zabbix'@'localhost';`  
 
 ➡️ **Sauvegarder les privilèges** : `FLUSH PRIVILEGES;`  
+
+➡️ **Quitter MySQL** : `quit`    
+   
+➡️ **Importer le schéma initial de Zabbix** : `zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -u zabbix -p zabbix`, un prompt apparaîtra et demandera d'entrer le mot de passe de l'utilisateur crée. Attendre environ 10 secondes.     
   
-➡️ **Importer le schéma initial de Zabbix** : `zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -u zabbix -p zabbix`  
+➡️ **Configurer Zabbix server** : `nano /etc/zabbix/zabbix_server.conf` :  
+- Vérifier que le fichier contient bien les lignes `DBName=zabbix` et `DBUser=zabbix`  
+- Sous `DBUser=zabbix`, il y a une ligne `#DBPassword` : décommenter la ligne (= supprimer le #) et ajouter le mot de passe de l'utilisateur MySQL configuré plus tôt.  
+- ✅ La ligne doit être identique à `DBPassword=MotDePasseSolide`  
+
+➡️ **Quitter et sauvegarder le fichier** : `Alt + X` puis `o`  
+
+➡️ **Démarrer et activer les services** : `systemctl restart zabbix-server zabbix-agent apache2 mariadb` et `systemctl enable zabbix-server zabbix-agent apache2 mariadb`  
+
+  
 
   
   
